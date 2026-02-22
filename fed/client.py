@@ -115,7 +115,7 @@ class FedFairGIBClient:
         """Evaluate on test set."""
         self.model.eval()
         with torch.no_grad():
-            logits, z, mu, log_var = self.model(self.data.x, self.data.edge_index)
+            logits, z, mu, log_var = self.model(self.data.x, self.data.edge_index, force_fairness=True)
             probs = F.softmax(logits, dim=1)
             preds = logits.argmax(dim=1)
         

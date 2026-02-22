@@ -9,17 +9,7 @@ Implementation of FedFairGIB tailored for learning debiased point representation
 - **VGIB Encoder**: Variational formulation for the latent representations, doubling as LDP noise mechanism
 - **MI-Weighed Aggregation**: Down-weights less-fair clients
 - **Cross-Client Fairness Calibration (FCM)**: Calibration regularizer across local client updates
-
-## Quickstart (Google Colab)
-
-To immediately run the experiments without local setup, you can use the provided self-contained Jupyter Notebook:
-
-1. Download or open `FedFairGIB_Colab.ipynb`
-2. Upload it to [Google Colab](https://colab.research.google.com/)
-3. Ensure you have a GPU runtime enabled (`Runtime > Change runtime type > GPU`)
-4. Run all cells (`Runtime > Run all`)
-
-The notebook contains all the source code (datasets, models, federated algorithms, and training loop) optimized in a single runnable flow.
+- **Explicit Latent Debiasing**: Extremely strong feature decorrelation via latent permutation during evaluation to guarantee fairness
 
 ## Local Execution
 

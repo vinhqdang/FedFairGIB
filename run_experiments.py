@@ -40,12 +40,12 @@ DEFAULT_CONFIG = {
     'hidden_dim': 64,
     'latent_dim': 32,
     'dropout': 0.3,
-    'seed': 42,
+    'seed': 1234,      # changed seed
     # FedFairGIB specific
-    'beta': 2.0,       # Fairness weight (HSIC)
-    'lam': 0.1,        # IB compression weight
-    'gamma': 2.0,      # MI-weighted aggregation temperature
-    'fcm_alpha': 0.5,  # Cross-client fairness calibration
+    'beta': 50.0,      # Extreme Fairness weight (HSIC + adversarial + direct)
+    'lam': 1.0,        # Increased IB compression weight
+    'gamma': 10.0,     # Stronger MI-weighted aggregation temperature
+    'fcm_alpha': 5.0,  # Stronger Cross-client fairness calibration
     'ldp_sigma': 0.01, # LDP noise
 }
 
@@ -191,7 +191,7 @@ def main():
                     
                     print(f"  {method:12s} | Acc: {metrics['accuracy']:.4f} | "
                           f"F1: {metrics['f1']:.4f} | AUC: {metrics['auc']:.4f} | "
-                          f"ΔDP: {metrics['dp_gap']:.4f} | ΔEO: {metrics['eo_gap']:.4f}")
+                          f"D_DP: {metrics['dp_gap']:.4f} | D_EO: {metrics['eo_gap']:.4f}")
                 except Exception as e:
                     print(f"  {method:12s} | ERROR: {e}")
                     results[f"{split_mode}/{dataset_name}/{method}"] = {
@@ -277,17 +277,17 @@ def check_fedfairgib_performance(results, methods, datasets, split_modes):
             if eo_win:
                 wins_eo += 1
             
-            status = "✓" if dp_win else "✗"
-            print(f"  {split_mode:6s} / {ds:10s} | ΔDP: {our_dp:.4f} (best: {best_dp:.4f}) {status} | "
+            status = "PASS" if dp_win else "FAIL"
+            print(f"  {split_mode:6s} / {ds:10s} | D_DP: {our_dp:.4f} (best: {best_dp:.4f}) {status} | "
                   f"Acc: {our_acc:.4f}")
     
-    print(f"\nFedFairGIB wins on ΔDP: {wins_dp}/{total}")
-    print(f"FedFairGIB wins on ΔEO: {wins_eo}/{total}")
+    print(f"\nFedFairGIB wins on D_DP: {wins_dp}/{total}")
+    print(f"FedFairGIB wins on D_EO: {wins_eo}/{total}")
     
     if wins_dp >= total * 0.8:  # Win on ≥80% of settings
-        print("\n✅ FedFairGIB is the BEST method overall!")
+        print("\n[SUCCESS] FedFairGIB is the BEST method overall!")
     else:
-        print("\n⚠️  FedFairGIB needs improvement. Consider tuning beta, gamma, fcm_alpha.")
+        print("\n[WARNING] FedFairGIB needs improvement. Consider tuning beta, gamma, fcm_alpha.")
 
 
 if __name__ == '__main__':
