@@ -109,15 +109,15 @@ def main():
             continue
             
         print(f"Generating grouped bar plots for {split}...")
-        plot_grouped_bar(results, split, 'Accuracy', 'Accuracy', f'bar_accuracy_{split}.pdf')
-        plot_grouped_bar(results, split, 'D_DP', 'Demographic Parity Gap', f'bar_ddp_{split}.pdf')
-        plot_grouped_bar(results, split, 'D_EO', 'Equal Opportunity Gap', f'bar_deo_{split}.pdf')
+        plot_grouped_bar(results, split, 'Accuracy', 'Accuracy', f'bar_accuracy_{split}.png')
+        plot_grouped_bar(results, split, 'D_DP', 'Demographic Parity Gap', f'bar_ddp_{split}.png')
+        plot_grouped_bar(results, split, 'D_EO', 'Equal Opportunity Gap', f'bar_deo_{split}.png')
         
         # Datasets
         datasets = list(results[split].keys())
         for ds in datasets:
             print(f"Generating Pareto plot for {split} - {ds}...")
-            plot_pareto_frontier(results, split, ds, f'pareto_{ds}_{split}.pdf')
+            plot_pareto_frontier(results, split, ds, f'pareto_{ds}_{split}.png')
             
     print("Figures successfully generated in results/figures/ directory.")
 
