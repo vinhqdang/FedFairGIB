@@ -42,10 +42,10 @@ DEFAULT_CONFIG = {
     'dropout': 0.3,
     'seed': 1234,      # changed seed
     # FedFairGIB specific
-    'beta': 50.0,      # Extreme Fairness weight (HSIC + adversarial + direct)
-    'lam': 1.0,        # Increased IB compression weight
-    'gamma': 10.0,     # Stronger MI-weighted aggregation temperature
-    'fcm_alpha': 5.0,  # Stronger Cross-client fairness calibration
+    'beta': 2.0,       # Balanced Fairness weight (HSIC + adversarial + direct)
+    'lam': 0.5,        # Normal IB compression weight
+    'gamma': 2.0,      # MI-weighted aggregation temperature
+    'fcm_alpha': 1.0,  # Cross-client fairness calibration
     'ldp_sigma': 0.01, # LDP noise
 }
 
